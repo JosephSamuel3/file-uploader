@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<main>
+  <h1>Login</h1>
+
+  <% if (locals.errors && errors.length > 0) { %>
+    <ul class="errors">
+      <% errors.forEach(err => { %>
+        <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/login" method="POST">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required />
+
+    <button type="submit">Login</button>
+  </form>
+</main>
+
+<%- include('partials/footer') %>

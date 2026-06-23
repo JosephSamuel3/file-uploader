@@ -1,0 +1,54 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  color: #333;
+}
+
+nav {
+  padding: 1rem;
+  background: #eee;
+  display: flex;
+  gap: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  color: #999;
+}
+
+.errors {
+  list-style: none;
+  color: red;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
