@@ -40,7 +40,6 @@ model Folder {
 model File {
   id        Int      @id @default(autoincrement())
   name      String
-  url       String
   path      String
   size      Int
   mimeType  String

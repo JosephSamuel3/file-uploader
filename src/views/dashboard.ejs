@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<main>
+  <nav class="breadcrumbs">
+    <a href="/dashboard">My Drive</a>
+    <% breadcrumbs.forEach(function(crumb) { %>
+      / <a href="/dashboard/<%= crumb.id %>"><%= crumb.name %></a>
+    <% }) %>
+  </nav>
+
+  <section class="toolbar">
+    <form action="/folders" method="POST">
+      <input type="hidden" name="parentId" value="<%= currentFolder ? currentFolder.id : '' %>" />
+      <input type="text" name="name" placeholder="New folder name" required />
+      <button type="submit">+ Folder</button>
+    </form>
+
+    <form action="/files" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>" />
+      <input type="file" name="file" required />
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+  <section class="folders">
+    <h2>Folders</h2>
+    <% if (folders.length === 0) { %>
+      <p>No folders here.</p>
+    <% } else { %>
+      <ul>
+        <% folders.forEach(function(folder) { %>
+          <li>
+            <a href="/dashboard/<%= folder.id %>">📁 <%= folder.name %></a>
+            <form class="rename" action="/folders/<%= folder.id %>/rename" method="POST">
+              <input type="text" name="name" value="<%= folder.name %>" required />
+              <button type="submit">Rename</button>
+            </form>
+            <form class="delete" action="/folders/<%= folder.id %>/delete" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="files">
+    <h2>Files</h2>
+    <% if (files.length === 0) { %>
+      <p>No files here.</p>
+    <% } else { %>
+      <ul>
+        <% files.forEach(function(file) { %>
+          <li>
+            <a href="/files/<%= file.id %>/download">📄 <%= file.name %></a>
+            <span class="meta"><%= formatFileSize(file.size) %></span>
+            <form class="rename" action="/files/<%= file.id %>/rename" method="POST">
+              <input type="text" name="name" value="<%= file.name %>" required />
+              <button type="submit">Rename</button>
+            </form>
+            <form class="delete" action="/files/<%= file.id %>/delete" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
