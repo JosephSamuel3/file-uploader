@@ -7,9 +7,3 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
   res.redirect("/login");
 }
 
-export function isGuest(req: Request, res: Response, next: NextFunction) {
-  if (!req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/");
-}

@@ -53,4 +53,11 @@ const postLogin = passport.authenticate("local", {
   failureRedirect: "/login",
 });
 
-export { getLogin, getSignUp, postSignUp, postLogin };
+const getLogOut = (req: Request, res: Response, next: NextFunction) => {
+  req.logOut((err) => {
+    if (err) return next(err)
+    res.redirect("/")
+  })
+}
+
+export { getLogin, getSignUp, postSignUp, postLogin, getLogOut };

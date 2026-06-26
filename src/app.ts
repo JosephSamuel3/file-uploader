@@ -9,15 +9,15 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import passport from "passport";
 
 import "./config/passport";
-import prisma from "./lib/prisma";
-import indexRouter from "./routes/index";
+import { prisma } from "./lib/prisma";
+import { router } from "./routes/router"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,7 +38,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", indexRouter);
+app.use("/", router);
 
 app.use((_req: Request, res: Response) => {
   res.status(404).render("errors/error", {

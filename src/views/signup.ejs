@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <main>
-  <h1>Login</h1>
+  <h1>Sign Up</h1>
 
   <% if (locals.errors && errors.length > 0) { %>
     <ul class="errors">
@@ -11,16 +11,24 @@
     </ul>
   <% } %>
 
-  <form action="/login" method="POST">
+  <form action="/signup" method="POST">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" name="firstName" required />
+
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" name="lastName" required />
+
     <label for="username">Username</label>
     <input type="text" id="username" name="username" required />
 
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required />
 
-    <button type="submit">Login</button>
+    <button type="submit">Sign Up</button>
   </form>
-  <p>dont have an account <a href="/signup">signup</a></p>
 </main>
 
 <%- include('partials/footer') %>
