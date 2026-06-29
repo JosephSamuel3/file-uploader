@@ -5,8 +5,8 @@
         <h2><%= file.name%></h2>
         <span class="meta"><%= formatFileSize(file.size) %></span>
         <p>Uploaded on: <%= formatDate(file.createdAt) %></p>
-        <% if (file.mimetype) { %>
-          <p>Type: <%= file.mimetype %></p>
+        <% if (file.mimeType) { %>
+          <p>Type: <%= file.mimeType %></p>
         <% } else { %>
           <p>No mimetype available</p>
         <% } %>

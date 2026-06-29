@@ -2,6 +2,7 @@ import express from "express";
 import { isAuthenticated } from "../middleware/auth";
 import { upload } from "../middleware/upload";
 import { nameValidator, signUpValidator } from "../validators/nameValidator";
+import { validateFile } from "../validators/validateFile";
 import * as indexController from "../controllers/indexController";
 import * as authController from "../controllers/authController";
 import * as fileController from "../controllers/fileController";
@@ -31,7 +32,7 @@ router.post("/folders/:id/rename", isAuthenticated, nameValidator, folderControl
 router.post("/folders/:id/delete", isAuthenticated, folderController.postDeleteFolder);
 
 //files
-router.post("/files", isAuthenticated, upload.single("file"), fileController.postUploadFile);
+router.post("/files", isAuthenticated, upload.single("file"), validateFile, fileController.postUploadFile);
 router.get("/files/:id/detail", isAuthenticated, fileController.getFileDetail)
 router.get("/files/:id/download", isAuthenticated, fileController.getDownloadFile);
 router.post("/files/:id/rename", isAuthenticated, nameValidator, fileController.postRenameFile);

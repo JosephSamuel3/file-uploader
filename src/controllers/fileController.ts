@@ -1,9 +1,9 @@
-import fs from "fs/promises";
 import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
 import { prisma } from "../lib/prisma";
 import { formatFileSize, formatDate } from "../utils/fileFormat";
 import { setFlash } from "../utils/flash";
+import { uploadFile, deleteFile, getSignedUrl } from "../utils/storage";
 
 function backToFolder(res: Response, folderId: number | null) {
   res.redirect(folderId ? `/dashboard/${folderId}` : "/dashboard");
@@ -24,7 +24,6 @@ async function postUploadFile(req: Request, res: Response, next: NextFunction) {
     if (folderId) {
       const folder = await prisma.folder.findFirst({ where: { id: folderId, userId } });
       if (!folder) {
-        await fs.unlink(req.file.path).catch(() => {});
         return res.status(404).render("errors/error", {
           title: "Not Found",
           message: "Folder not found.",
@@ -32,10 +31,12 @@ async function postUploadFile(req: Request, res: Response, next: NextFunction) {
       }
     }
 
+    const storagePath = await uploadFile(userId, req.file);
+
     await prisma.file.create({
       data: {
         name: req.file.originalname,
-        path: req.file.path,
+        path: storagePath,
         size: req.file.size,
         mimeType: req.file.mimetype,
         userId,
@@ -89,7 +90,8 @@ async function getDownloadFile(req: Request, res: Response, next: NextFunction) 
       });
     }
 
-    res.download(file.path, file.name);
+    const signedUrl = await getSignedUrl(file.path, 60, file.name);
+    res.redirect(signedUrl);
   } catch (error) {
     next(error);
   }
@@ -154,7 +156,7 @@ async function postDeleteFile(req: Request, res: Response, next: NextFunction) {
     }
 
     await prisma.file.delete({ where: { id: fileId } });
-    await fs.unlink(file.path).catch(() => {});
+    await deleteFile(file.path).catch(() => {});
 
     backToFolder(res, file.folderId);
   } catch (error) {
