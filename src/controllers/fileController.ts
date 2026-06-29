@@ -2,6 +2,8 @@ import fs from "fs/promises";
 import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
 import { prisma } from "../lib/prisma";
+import { formatFileSize, formatDate } from "../utils/fileFormat";
+import { setFlash } from "../utils/flash";
 
 function backToFolder(res: Response, folderId: number | null) {
   res.redirect(folderId ? `/dashboard/${folderId}` : "/dashboard");
@@ -47,6 +49,33 @@ async function postUploadFile(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function getFileDetail(req: Request, res: Response, next: NextFunction) {
+  try{
+    const userId = req.user!.id;
+    const fileId = Number(req.params.id);
+
+    const file = await prisma.file.findFirst({ where: { id: fileId, userId } });
+    if (!file) {
+      return res.status(404).render("errors/error", {
+        title: "Not Found",
+        message: "File not found.",
+      });
+    }
+
+    res.render("file-detail", {
+      title: "File detail",
+      user: req.user,
+      file,
+      formatFileSize,
+      formatDate,
+      errors: [],
+    })
+
+  }catch(error){
+    next(error);
+  }
+}
+
 async function getDownloadFile(req: Request, res: Response, next: NextFunction) {
   try {
     const userId = req.user!.id;
@@ -82,6 +111,23 @@ async function postRenameFile(req: Request, res: Response, next: NextFunction) {
     }
 
     if (!errors.isEmpty()) {
+      if (req.body.redirectTarget === "detail") {
+        return res.status(400).render("file-detail", {
+          title: "File detail",
+          user: req.user,
+          file,
+          formValue: req.body.name,
+          formatFileSize,
+          formatDate,
+          errors: errors.array(),
+        });
+      }
+
+      setFlash(req, {
+        formId: `rename-file-${fileId}`,
+        errors: errors.array(),
+        data: { name: req.body.name },
+      });
       return backToFolder(res, file.folderId);
     }
 
@@ -116,4 +162,4 @@ async function postDeleteFile(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export { postUploadFile, getDownloadFile, postRenameFile, postDeleteFile };
+export { postUploadFile, getDownloadFile, postRenameFile, postDeleteFile, getFileDetail };

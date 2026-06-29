@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<main class="detail">
+    <div class="card">
+        <h2><%= file.name%></h2>
+        <span class="meta"><%= formatFileSize(file.size) %></span>
+        <p>Uploaded on: <%= formatDate(file.createdAt) %></p>
+        <% if (file.mimetype) { %>
+          <p>Type: <%= file.mimetype %></p>
+        <% } else { %>
+          <p>No mimetype available</p>
+        <% } %>
+
+        <% if (locals.errors && errors.length > 0) { %>
+          <ul class="errors">
+            <% errors.forEach(function(err) { %>
+              <li><%= err.msg %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+
+        <form class="rename" action="/files/<%= file.id %>/rename" method="POST" novalidate>
+            <input type="hidden" name="redirectTarget" value="detail" />
+            <input
+              type="text"
+              name="name"
+              value="<%= typeof formValue !== 'undefined' ? formValue : file.name %>"
+              class="<%= locals.errors && errors.length > 0 ? 'invalid' : '' %>"
+            />
+            <button type="submit">Rename</button>
+        </form>
+
+        <div class="actions">
+            <form action="/files/<%= file.id %>/download" method="GET">
+                <button type="submit">Download</button>
+            </form>
+            <form class="delete" action="/files/<%= file.id %>/delete" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

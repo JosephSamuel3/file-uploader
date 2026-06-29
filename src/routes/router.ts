@@ -32,6 +32,7 @@ router.post("/folders/:id/delete", isAuthenticated, folderController.postDeleteF
 
 //files
 router.post("/files", isAuthenticated, upload.single("file"), fileController.postUploadFile);
+router.get("/files/:id/detail", isAuthenticated, fileController.getFileDetail)
 router.get("/files/:id/download", isAuthenticated, fileController.getDownloadFile);
 router.post("/files/:id/rename", isAuthenticated, nameValidator, fileController.postRenameFile);
 router.post("/files/:id/delete", isAuthenticated, fileController.postDeleteFile);

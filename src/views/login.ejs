@@ -1,26 +1,28 @@
 <%- include('partials/header') %>
 
-<main>
-  <h1>Login</h1>
+<main class="auth">
+  <div class="card">
+    <h1>Login</h1>
 
-  <% if (locals.errors && errors.length > 0) { %>
-    <ul class="errors">
-      <% errors.forEach(err => { %>
-        <li><%= err.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
+    <% if (locals.errors && errors.length > 0) { %>
+      <ul class="errors">
+        <% errors.forEach(err => { %>
+          <li><%= err.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
 
-  <form action="/login" method="POST">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" required />
+    <form action="/login" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" />
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
 
-    <button type="submit">Login</button>
-  </form>
-  <p>dont have an account <a href="/signup">signup</a></p>
+      <button type="submit">Login</button>
+    </form>
+    <p>dont have an account <a href="/signup">sign up</a></p>
+  </div>
 </main>
 
 <%- include('partials/footer') %>

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { prisma } from "../lib/prisma";
 import { getBreadcrumbs } from "../utils/breadcrumbs";
 import { formatFileSize } from "../utils/fileFormat";
+import { popFlash } from "../utils/flash";
 
 //call to action page before user is loged in
 const getIndex = (req: Request, res: Response) => {
@@ -54,7 +55,7 @@ async function getDashBoard(req: Request, res: Response, next: NextFunction) {
       folders,
       files,
       formatFileSize,
-      errors: [],
+      flash: popFlash(req),
     });
   } catch (error) {
     next(error);

@@ -8,16 +8,34 @@
     <% }) %>
   </nav>
 
+  <%
+    const flashFor = (formId) => (locals.flash && flash.formId === formId ? flash : null);
+    const createFolderFlash = flashFor("create-folder");
+  %>
+
   <section class="toolbar">
-    <form action="/folders" method="POST">
+    <form action="/folders" method="POST" novalidate>
       <input type="hidden" name="parentId" value="<%= currentFolder ? currentFolder.id : '' %>" />
-      <input type="text" name="name" placeholder="New folder name" required />
+      <input
+        type="text"
+        name="name"
+        placeholder="New folder name"
+        value="<%= createFolderFlash && createFolderFlash.data ? createFolderFlash.data.name : '' %>"
+        class="<%= createFolderFlash ? 'invalid' : '' %>"
+      />
       <button type="submit">+ Folder</button>
+      <% if (createFolderFlash) { %>
+        <ul class="errors">
+          <% createFolderFlash.errors.forEach(function(err) { %>
+            <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
     </form>
 
     <form action="/files" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>" />
-      <input type="file" name="file" required />
+      <input type="file" name="file" />
       <button type="submit">Upload</button>
     </form>
   </section>
@@ -25,15 +43,33 @@
   <section class="folders">
     <h2>Folders</h2>
     <% if (folders.length === 0) { %>
-      <p>No folders here.</p>
+      <p class="empty">No folders here.</p>
     <% } else { %>
       <ul>
         <% folders.forEach(function(folder) { %>
+          <% const renameFlash = flashFor(`rename-folder-${folder.id}`); %>
           <li>
             <a href="/dashboard/<%= folder.id %>">📁 <%= folder.name %></a>
-            <form class="rename" action="/folders/<%= folder.id %>/rename" method="POST">
-              <input type="text" name="name" value="<%= folder.name %>" required />
+            <form
+              class="rename <%= renameFlash ? 'has-error' : '' %>"
+              action="/folders/<%= folder.id %>/rename"
+              method="POST"
+              novalidate
+            >
+              <input
+                type="text"
+                name="name"
+                value="<%= renameFlash && renameFlash.data ? renameFlash.data.name : folder.name %>"
+                class="<%= renameFlash ? 'invalid' : '' %>"
+              />
               <button type="submit">Rename</button>
+              <% if (renameFlash) { %>
+                <ul class="errors">
+                  <% renameFlash.errors.forEach(function(err) { %>
+                    <li><%= err.msg %></li>
+                  <% }) %>
+                </ul>
+              <% } %>
             </form>
             <form class="delete" action="/folders/<%= folder.id %>/delete" method="POST">
               <button type="submit">Delete</button>
@@ -47,19 +83,40 @@
   <section class="files">
     <h2>Files</h2>
     <% if (files.length === 0) { %>
-      <p>No files here.</p>
+      <p class="empty">No files here.</p>
     <% } else { %>
       <ul>
         <% files.forEach(function(file) { %>
+          <% const renameFlash = flashFor(`rename-file-${file.id}`); %>
           <li>
-            <a href="/files/<%= file.id %>/download">📄 <%= file.name %></a>
+            <a href="/files/<%= file.id %>/detail">📄 <%= file.name %></a>
             <span class="meta"><%= formatFileSize(file.size) %></span>
-            <form class="rename" action="/files/<%= file.id %>/rename" method="POST">
-              <input type="text" name="name" value="<%= file.name %>" required />
+            <form
+              class="rename <%= renameFlash ? 'has-error' : '' %>"
+              action="/files/<%= file.id %>/rename"
+              method="POST"
+              novalidate
+            >
+              <input
+                type="text"
+                name="name"
+                value="<%= renameFlash && renameFlash.data ? renameFlash.data.name : file.name %>"
+                class="<%= renameFlash ? 'invalid' : '' %>"
+              />
               <button type="submit">Rename</button>
+              <% if (renameFlash) { %>
+                <ul class="errors">
+                  <% renameFlash.errors.forEach(function(err) { %>
+                    <li><%= err.msg %></li>
+                  <% }) %>
+                </ul>
+              <% } %>
             </form>
             <form class="delete" action="/files/<%= file.id %>/delete" method="POST">
               <button type="submit">Delete</button>
+            </form>
+            <form action="/files/<%= file.id %>/download" method="GET">
+              <button type="submit">Download</button>
             </form>
           </li>
         <% }) %>

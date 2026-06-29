@@ -1,34 +1,71 @@
 <%- include('partials/header') %>
 
-<main>
-  <h1>Sign Up</h1>
+<main class="auth">
+  <div class="card">
+    <h1>Sign Up</h1>
 
-  <% if (locals.errors && errors.length > 0) { %>
-    <ul class="errors">
-      <% errors.forEach(err => { %>
-        <li><%= err.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
+    <%
+      const fd = locals.formData || {};
+      const fieldError = (field) => (locals.errors || []).find((e) => e.path === field);
+    %>
 
-  <form action="/signup" method="POST">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required />
+    <% if (locals.errors && errors.length > 0) { %>
+      <ul class="errors">
+        <% errors.forEach(err => { %>
+          <li><%= err.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
 
-    <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" required />
+    <form action="/signup" method="POST" novalidate>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= fd.email || '' %>"
+        class="<%= fieldError('email') ? 'invalid' : '' %>"
+      />
 
-    <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" required />
+      <label for="firstName">First name</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value="<%= fd.firstName || '' %>"
+        class="<%= fieldError('firstName') ? 'invalid' : '' %>"
+      />
 
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" required />
+      <label for="lastName">Last name</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value="<%= fd.lastName || '' %>"
+        class="<%= fieldError('lastName') ? 'invalid' : '' %>"
+      />
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required />
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value="<%= fd.username || '' %>"
+        class="<%= fieldError('username') ? 'invalid' : '' %>"
+      />
 
-    <button type="submit">Sign Up</button>
-  </form>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="<%= fieldError('password') ? 'invalid' : '' %>"
+      />
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>already have an account? <a href="/login">Log in</a></p>
+  </div>
 </main>
 
 <%- include('partials/footer') %>

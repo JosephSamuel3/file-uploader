@@ -1,13 +1,13 @@
 <%- include('partials/header') %>
 
-<main>
+<main class="home">
   <h1>Welcome</h1>
   <% if (locals.user) { %>
-    <p>Hello, <%= user.username %>!</p>
+    <p>Hello, <%= user.username %>! Ready to check your files?</p>
+    <a href="/dashboard"><button type="button">Go to Dashboard</button></a>
   <% } else { %>
     <p><a href="/login">Log in</a> to get started.</p>
   <% } %>
-  <h1>check your files <a href="/dashboard">dashboard</a></h1>
 </main>
 
 <%- include('partials/footer') %>

@@ -15,6 +15,7 @@ const getSignUp = (req: Request, res: Response) => {
   res.render("signup", {
     title: "Signup",
     errors: [],
+    formData: {},
   });
 };
 
@@ -25,6 +26,7 @@ async function postSignUp(req: Request, res: Response, next: NextFunction) {
     return res.render("signup", {
       title: "Signup",
       errors: errors.array(),
+      formData: req.body,
     });
   }
 

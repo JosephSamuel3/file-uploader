@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
 import { prisma } from "../lib/prisma";
 import { getDescendantFilePaths } from "../utils/folderTree";
+import { setFlash } from "../utils/flash";
 
 function backToFolder(res: Response, folderId: number | null) {
   res.redirect(folderId ? `/dashboard/${folderId}` : "/dashboard");
@@ -13,6 +14,11 @@ async function postCreateFolder(req: Request, res: Response, next: NextFunction)
   const parentId = req.body.parentId ? Number(req.body.parentId) : null;
 
   if (!errors.isEmpty()) {
+    setFlash(req, {
+      formId: "create-folder",
+      errors: errors.array(),
+      data: { name: req.body.name },
+    });
     return backToFolder(res, parentId);
   }
 
@@ -54,6 +60,11 @@ async function postRenameFolder(req: Request, res: Response, next: NextFunction)
     }
 
     if (!errors.isEmpty()) {
+      setFlash(req, {
+        formId: `rename-folder-${folderId}`,
+        errors: errors.array(),
+        data: { name: req.body.name },
+      });
       return backToFolder(res, folder.parentId);
     }
 
