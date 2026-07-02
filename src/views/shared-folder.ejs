@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<main>
+  <h1>📁 <%= folder.name %></h1>
+
+  <section class="folders">
+    <h2>Subfolders</h2>
+    <% if (folder.children.length === 0) { %>
+      <p class="empty">No subfolders.</p>
+    <% } else { %>
+      <ul>
+        <% folder.children.forEach(function(child) { %>
+          <li>📁 <%= child.name %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="files">
+    <h2>Files</h2>
+    <% if (folder.files.length === 0) { %>
+      <p class="empty">No files here.</p>
+    <% } else { %>
+      <ul>
+        <% folder.files.forEach(function(file) { %>
+          <li>
+            📄 <%= file.name %>
+            <a href="/share/<%= token %>/files/<%= file.id %>/download">Download</a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

@@ -28,12 +28,12 @@ export type AggregateShare = {
 
 export type ShareAvgAggregateOutputType = {
   id: number | null
-  fileId: number | null
+  folderId: number | null
 }
 
 export type ShareSumAggregateOutputType = {
   id: number | null
-  fileId: number | null
+  folderId: number | null
 }
 
 export type ShareMinAggregateOutputType = {
@@ -41,7 +41,7 @@ export type ShareMinAggregateOutputType = {
   token: string | null
   expiresAt: Date | null
   createdAt: Date | null
-  fileId: number | null
+  folderId: number | null
 }
 
 export type ShareMaxAggregateOutputType = {
@@ -49,7 +49,7 @@ export type ShareMaxAggregateOutputType = {
   token: string | null
   expiresAt: Date | null
   createdAt: Date | null
-  fileId: number | null
+  folderId: number | null
 }
 
 export type ShareCountAggregateOutputType = {
@@ -57,19 +57,19 @@ export type ShareCountAggregateOutputType = {
   token: number
   expiresAt: number
   createdAt: number
-  fileId: number
+  folderId: number
   _all: number
 }
 
 
 export type ShareAvgAggregateInputType = {
   id?: true
-  fileId?: true
+  folderId?: true
 }
 
 export type ShareSumAggregateInputType = {
   id?: true
-  fileId?: true
+  folderId?: true
 }
 
 export type ShareMinAggregateInputType = {
@@ -77,7 +77,7 @@ export type ShareMinAggregateInputType = {
   token?: true
   expiresAt?: true
   createdAt?: true
-  fileId?: true
+  folderId?: true
 }
 
 export type ShareMaxAggregateInputType = {
@@ -85,7 +85,7 @@ export type ShareMaxAggregateInputType = {
   token?: true
   expiresAt?: true
   createdAt?: true
-  fileId?: true
+  folderId?: true
 }
 
 export type ShareCountAggregateInputType = {
@@ -93,7 +93,7 @@ export type ShareCountAggregateInputType = {
   token?: true
   expiresAt?: true
   createdAt?: true
-  fileId?: true
+  folderId?: true
   _all?: true
 }
 
@@ -188,7 +188,7 @@ export type ShareGroupByOutputType = {
   token: string
   expiresAt: Date | null
   createdAt: Date
-  fileId: number
+  folderId: number
   _count: ShareCountAggregateOutputType | null
   _avg: ShareAvgAggregateOutputType | null
   _sum: ShareSumAggregateOutputType | null
@@ -219,8 +219,8 @@ export type ShareWhereInput = {
   token?: Prisma.StringFilter<"Share"> | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Share"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Share"> | Date | string
-  fileId?: Prisma.IntFilter<"Share"> | number
-  file?: Prisma.XOR<Prisma.FileScalarRelationFilter, Prisma.FileWhereInput>
+  folderId?: Prisma.IntFilter<"Share"> | number
+  folder?: Prisma.XOR<Prisma.FolderScalarRelationFilter, Prisma.FolderWhereInput>
 }
 
 export type ShareOrderByWithRelationInput = {
@@ -228,8 +228,8 @@ export type ShareOrderByWithRelationInput = {
   token?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
-  file?: Prisma.FileOrderByWithRelationInput
+  folderId?: Prisma.SortOrder
+  folder?: Prisma.FolderOrderByWithRelationInput
 }
 
 export type ShareWhereUniqueInput = Prisma.AtLeast<{
@@ -240,8 +240,8 @@ export type ShareWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShareWhereInput | Prisma.ShareWhereInput[]
   expiresAt?: Prisma.DateTimeNullableFilter<"Share"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Share"> | Date | string
-  fileId?: Prisma.IntFilter<"Share"> | number
-  file?: Prisma.XOR<Prisma.FileScalarRelationFilter, Prisma.FileWhereInput>
+  folderId?: Prisma.IntFilter<"Share"> | number
+  folder?: Prisma.XOR<Prisma.FolderScalarRelationFilter, Prisma.FolderWhereInput>
 }, "id" | "token">
 
 export type ShareOrderByWithAggregationInput = {
@@ -249,7 +249,7 @@ export type ShareOrderByWithAggregationInput = {
   token?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
   _count?: Prisma.ShareCountOrderByAggregateInput
   _avg?: Prisma.ShareAvgOrderByAggregateInput
   _max?: Prisma.ShareMaxOrderByAggregateInput
@@ -265,14 +265,14 @@ export type ShareScalarWhereWithAggregatesInput = {
   token?: Prisma.StringWithAggregatesFilter<"Share"> | string
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Share"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Share"> | Date | string
-  fileId?: Prisma.IntWithAggregatesFilter<"Share"> | number
+  folderId?: Prisma.IntWithAggregatesFilter<"Share"> | number
 }
 
 export type ShareCreateInput = {
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
-  file: Prisma.FileCreateNestedOneWithoutSharesInput
+  folder: Prisma.FolderCreateNestedOneWithoutSharesInput
 }
 
 export type ShareUncheckedCreateInput = {
@@ -280,14 +280,14 @@ export type ShareUncheckedCreateInput = {
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
-  fileId: number
+  folderId: number
 }
 
 export type ShareUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file?: Prisma.FileUpdateOneRequiredWithoutSharesNestedInput
+  folder?: Prisma.FolderUpdateOneRequiredWithoutSharesNestedInput
 }
 
 export type ShareUncheckedUpdateInput = {
@@ -295,7 +295,7 @@ export type ShareUncheckedUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fileId?: Prisma.IntFieldUpdateOperationsInput | number
+  folderId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ShareCreateManyInput = {
@@ -303,7 +303,7 @@ export type ShareCreateManyInput = {
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
-  fileId: number
+  folderId: number
 }
 
 export type ShareUpdateManyMutationInput = {
@@ -317,7 +317,7 @@ export type ShareUncheckedUpdateManyInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fileId?: Prisma.IntFieldUpdateOperationsInput | number
+  folderId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ShareListRelationFilter = {
@@ -335,12 +335,12 @@ export type ShareCountOrderByAggregateInput = {
   token?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
 }
 
 export type ShareAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
 }
 
 export type ShareMaxOrderByAggregateInput = {
@@ -348,7 +348,7 @@ export type ShareMaxOrderByAggregateInput = {
   token?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
 }
 
 export type ShareMinOrderByAggregateInput = {
@@ -356,53 +356,53 @@ export type ShareMinOrderByAggregateInput = {
   token?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
 }
 
 export type ShareSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fileId?: Prisma.SortOrder
+  folderId?: Prisma.SortOrder
 }
 
-export type ShareCreateNestedManyWithoutFileInput = {
-  create?: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput> | Prisma.ShareCreateWithoutFileInput[] | Prisma.ShareUncheckedCreateWithoutFileInput[]
-  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFileInput | Prisma.ShareCreateOrConnectWithoutFileInput[]
-  createMany?: Prisma.ShareCreateManyFileInputEnvelope
+export type ShareCreateNestedManyWithoutFolderInput = {
+  create?: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput> | Prisma.ShareCreateWithoutFolderInput[] | Prisma.ShareUncheckedCreateWithoutFolderInput[]
+  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFolderInput | Prisma.ShareCreateOrConnectWithoutFolderInput[]
+  createMany?: Prisma.ShareCreateManyFolderInputEnvelope
   connect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
 }
 
-export type ShareUncheckedCreateNestedManyWithoutFileInput = {
-  create?: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput> | Prisma.ShareCreateWithoutFileInput[] | Prisma.ShareUncheckedCreateWithoutFileInput[]
-  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFileInput | Prisma.ShareCreateOrConnectWithoutFileInput[]
-  createMany?: Prisma.ShareCreateManyFileInputEnvelope
+export type ShareUncheckedCreateNestedManyWithoutFolderInput = {
+  create?: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput> | Prisma.ShareCreateWithoutFolderInput[] | Prisma.ShareUncheckedCreateWithoutFolderInput[]
+  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFolderInput | Prisma.ShareCreateOrConnectWithoutFolderInput[]
+  createMany?: Prisma.ShareCreateManyFolderInputEnvelope
   connect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
 }
 
-export type ShareUpdateManyWithoutFileNestedInput = {
-  create?: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput> | Prisma.ShareCreateWithoutFileInput[] | Prisma.ShareUncheckedCreateWithoutFileInput[]
-  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFileInput | Prisma.ShareCreateOrConnectWithoutFileInput[]
-  upsert?: Prisma.ShareUpsertWithWhereUniqueWithoutFileInput | Prisma.ShareUpsertWithWhereUniqueWithoutFileInput[]
-  createMany?: Prisma.ShareCreateManyFileInputEnvelope
+export type ShareUpdateManyWithoutFolderNestedInput = {
+  create?: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput> | Prisma.ShareCreateWithoutFolderInput[] | Prisma.ShareUncheckedCreateWithoutFolderInput[]
+  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFolderInput | Prisma.ShareCreateOrConnectWithoutFolderInput[]
+  upsert?: Prisma.ShareUpsertWithWhereUniqueWithoutFolderInput | Prisma.ShareUpsertWithWhereUniqueWithoutFolderInput[]
+  createMany?: Prisma.ShareCreateManyFolderInputEnvelope
   set?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   disconnect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   delete?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   connect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
-  update?: Prisma.ShareUpdateWithWhereUniqueWithoutFileInput | Prisma.ShareUpdateWithWhereUniqueWithoutFileInput[]
-  updateMany?: Prisma.ShareUpdateManyWithWhereWithoutFileInput | Prisma.ShareUpdateManyWithWhereWithoutFileInput[]
+  update?: Prisma.ShareUpdateWithWhereUniqueWithoutFolderInput | Prisma.ShareUpdateWithWhereUniqueWithoutFolderInput[]
+  updateMany?: Prisma.ShareUpdateManyWithWhereWithoutFolderInput | Prisma.ShareUpdateManyWithWhereWithoutFolderInput[]
   deleteMany?: Prisma.ShareScalarWhereInput | Prisma.ShareScalarWhereInput[]
 }
 
-export type ShareUncheckedUpdateManyWithoutFileNestedInput = {
-  create?: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput> | Prisma.ShareCreateWithoutFileInput[] | Prisma.ShareUncheckedCreateWithoutFileInput[]
-  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFileInput | Prisma.ShareCreateOrConnectWithoutFileInput[]
-  upsert?: Prisma.ShareUpsertWithWhereUniqueWithoutFileInput | Prisma.ShareUpsertWithWhereUniqueWithoutFileInput[]
-  createMany?: Prisma.ShareCreateManyFileInputEnvelope
+export type ShareUncheckedUpdateManyWithoutFolderNestedInput = {
+  create?: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput> | Prisma.ShareCreateWithoutFolderInput[] | Prisma.ShareUncheckedCreateWithoutFolderInput[]
+  connectOrCreate?: Prisma.ShareCreateOrConnectWithoutFolderInput | Prisma.ShareCreateOrConnectWithoutFolderInput[]
+  upsert?: Prisma.ShareUpsertWithWhereUniqueWithoutFolderInput | Prisma.ShareUpsertWithWhereUniqueWithoutFolderInput[]
+  createMany?: Prisma.ShareCreateManyFolderInputEnvelope
   set?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   disconnect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   delete?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
   connect?: Prisma.ShareWhereUniqueInput | Prisma.ShareWhereUniqueInput[]
-  update?: Prisma.ShareUpdateWithWhereUniqueWithoutFileInput | Prisma.ShareUpdateWithWhereUniqueWithoutFileInput[]
-  updateMany?: Prisma.ShareUpdateManyWithWhereWithoutFileInput | Prisma.ShareUpdateManyWithWhereWithoutFileInput[]
+  update?: Prisma.ShareUpdateWithWhereUniqueWithoutFolderInput | Prisma.ShareUpdateWithWhereUniqueWithoutFolderInput[]
+  updateMany?: Prisma.ShareUpdateManyWithWhereWithoutFolderInput | Prisma.ShareUpdateManyWithWhereWithoutFolderInput[]
   deleteMany?: Prisma.ShareScalarWhereInput | Prisma.ShareScalarWhereInput[]
 }
 
@@ -410,43 +410,43 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type ShareCreateWithoutFileInput = {
+export type ShareCreateWithoutFolderInput = {
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
 
-export type ShareUncheckedCreateWithoutFileInput = {
+export type ShareUncheckedCreateWithoutFolderInput = {
   id?: number
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
 
-export type ShareCreateOrConnectWithoutFileInput = {
+export type ShareCreateOrConnectWithoutFolderInput = {
   where: Prisma.ShareWhereUniqueInput
-  create: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput>
+  create: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput>
 }
 
-export type ShareCreateManyFileInputEnvelope = {
-  data: Prisma.ShareCreateManyFileInput | Prisma.ShareCreateManyFileInput[]
+export type ShareCreateManyFolderInputEnvelope = {
+  data: Prisma.ShareCreateManyFolderInput | Prisma.ShareCreateManyFolderInput[]
   skipDuplicates?: boolean
 }
 
-export type ShareUpsertWithWhereUniqueWithoutFileInput = {
+export type ShareUpsertWithWhereUniqueWithoutFolderInput = {
   where: Prisma.ShareWhereUniqueInput
-  update: Prisma.XOR<Prisma.ShareUpdateWithoutFileInput, Prisma.ShareUncheckedUpdateWithoutFileInput>
-  create: Prisma.XOR<Prisma.ShareCreateWithoutFileInput, Prisma.ShareUncheckedCreateWithoutFileInput>
+  update: Prisma.XOR<Prisma.ShareUpdateWithoutFolderInput, Prisma.ShareUncheckedUpdateWithoutFolderInput>
+  create: Prisma.XOR<Prisma.ShareCreateWithoutFolderInput, Prisma.ShareUncheckedCreateWithoutFolderInput>
 }
 
-export type ShareUpdateWithWhereUniqueWithoutFileInput = {
+export type ShareUpdateWithWhereUniqueWithoutFolderInput = {
   where: Prisma.ShareWhereUniqueInput
-  data: Prisma.XOR<Prisma.ShareUpdateWithoutFileInput, Prisma.ShareUncheckedUpdateWithoutFileInput>
+  data: Prisma.XOR<Prisma.ShareUpdateWithoutFolderInput, Prisma.ShareUncheckedUpdateWithoutFolderInput>
 }
 
-export type ShareUpdateManyWithWhereWithoutFileInput = {
+export type ShareUpdateManyWithWhereWithoutFolderInput = {
   where: Prisma.ShareScalarWhereInput
-  data: Prisma.XOR<Prisma.ShareUpdateManyMutationInput, Prisma.ShareUncheckedUpdateManyWithoutFileInput>
+  data: Prisma.XOR<Prisma.ShareUpdateManyMutationInput, Prisma.ShareUncheckedUpdateManyWithoutFolderInput>
 }
 
 export type ShareScalarWhereInput = {
@@ -457,30 +457,30 @@ export type ShareScalarWhereInput = {
   token?: Prisma.StringFilter<"Share"> | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Share"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Share"> | Date | string
-  fileId?: Prisma.IntFilter<"Share"> | number
+  folderId?: Prisma.IntFilter<"Share"> | number
 }
 
-export type ShareCreateManyFileInput = {
+export type ShareCreateManyFolderInput = {
   id?: number
   token?: string
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
 
-export type ShareUpdateWithoutFileInput = {
+export type ShareUpdateWithoutFolderInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ShareUncheckedUpdateWithoutFileInput = {
+export type ShareUncheckedUpdateWithoutFolderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ShareUncheckedUpdateManyWithoutFileInput = {
+export type ShareUncheckedUpdateManyWithoutFolderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -494,8 +494,8 @@ export type ShareSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   token?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  fileId?: boolean
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folderId?: boolean
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -503,8 +503,8 @@ export type ShareSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   token?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  fileId?: boolean
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folderId?: boolean
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -512,8 +512,8 @@ export type ShareSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   token?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  fileId?: boolean
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folderId?: boolean
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["share"]>
 
 export type ShareSelectScalar = {
@@ -521,31 +521,31 @@ export type ShareSelectScalar = {
   token?: boolean
   expiresAt?: boolean
   createdAt?: boolean
-  fileId?: boolean
+  folderId?: boolean
 }
 
-export type ShareOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "token" | "expiresAt" | "createdAt" | "fileId", ExtArgs["result"]["share"]>
+export type ShareOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "token" | "expiresAt" | "createdAt" | "folderId", ExtArgs["result"]["share"]>
 export type ShareInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }
 export type ShareIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }
 export type ShareIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  file?: boolean | Prisma.FileDefaultArgs<ExtArgs>
+  folder?: boolean | Prisma.FolderDefaultArgs<ExtArgs>
 }
 
 export type $SharePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Share"
   objects: {
-    file: Prisma.$FilePayload<ExtArgs>
+    folder: Prisma.$FolderPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     token: string
     expiresAt: Date | null
     createdAt: Date
-    fileId: number
+    folderId: number
   }, ExtArgs["result"]["share"]>
   composites: {}
 }
@@ -940,7 +940,7 @@ readonly fields: ShareFieldRefs;
  */
 export interface Prisma__ShareClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  file<T extends Prisma.FileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FileDefaultArgs<ExtArgs>>): Prisma.Prisma__FileClient<runtime.Types.Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  folder<T extends Prisma.FolderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FolderDefaultArgs<ExtArgs>>): Prisma.Prisma__FolderClient<runtime.Types.Result.GetResult<Prisma.$FolderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -974,7 +974,7 @@ export interface ShareFieldRefs {
   readonly token: Prisma.FieldRef<"Share", 'String'>
   readonly expiresAt: Prisma.FieldRef<"Share", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Share", 'DateTime'>
-  readonly fileId: Prisma.FieldRef<"Share", 'Int'>
+  readonly folderId: Prisma.FieldRef<"Share", 'Int'>
 }
     
 

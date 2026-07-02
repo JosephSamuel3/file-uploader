@@ -56,6 +56,7 @@ async function getDashBoard(req: Request, res: Response, next: NextFunction) {
       files,
       formatFileSize,
       flash: popFlash(req),
+      shareUrl: req.query.shareUrl ? String(req.query.shareUrl) : null,
     });
   } catch (error) {
     next(error);

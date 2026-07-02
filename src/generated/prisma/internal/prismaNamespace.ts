@@ -862,7 +862,7 @@ export const ShareScalarFieldEnum = {
   token: 'token',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
-  fileId: 'fileId'
+  folderId: 'folderId'
 } as const
 
 export type ShareScalarFieldEnum = (typeof ShareScalarFieldEnum)[keyof typeof ShareScalarFieldEnum]

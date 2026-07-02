@@ -7,6 +7,7 @@ import * as indexController from "../controllers/indexController";
 import * as authController from "../controllers/authController";
 import * as fileController from "../controllers/fileController";
 import * as folderController from "../controllers/folderController";
+import * as shareController from "../controllers/shareController";
 
 const router = express.Router();
 
@@ -30,6 +31,11 @@ router.get("/dashboard/:folderId", isAuthenticated, indexController.getDashBoard
 router.post("/folders", isAuthenticated, nameValidator, folderController.postCreateFolder);
 router.post("/folders/:id/rename", isAuthenticated, nameValidator, folderController.postRenameFolder);
 router.post("/folders/:id/delete", isAuthenticated, folderController.postDeleteFolder);
+
+//share
+router.post("/folders/:id/share", isAuthenticated, shareController.postCreateShare);
+router.get("/share/:token", shareController.getSharedFolder);
+router.get("/share/:token/files/:fileId/download", shareController.getSharedFileDownload);
 
 //files
 router.post("/files", isAuthenticated, upload.single("file"), validateFile, fileController.postUploadFile);

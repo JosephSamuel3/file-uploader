@@ -6,10 +6,6 @@ function formatFileSize(bytes: number): string {
   return `${value.toFixed(exponent === 0 ? 0 : 1)} ${units[exponent]}`;
 }
 
-function getFileExtension(filename: string): string {
-  const lastDot = filename.lastIndexOf(".");
-  return lastDot === -1 ? "" : filename.slice(lastDot + 1).toLowerCase();
-}
 
 function formatDate(date: Date | string | null | undefined): string {
   if (!date) return "";
@@ -41,4 +37,4 @@ function formatDate(date: Date | string | null | undefined): string {
   return `${weekday}, ${month} ${day}, ${year} ${time} ${timezone}`;
 }
 
-export { formatFileSize, getFileExtension, formatDate };
+export { formatFileSize, formatDate };

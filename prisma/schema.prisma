@@ -35,6 +35,7 @@ model Folder {
   children  Folder[] @relation("FolderToFolder")
 
   files     File[]
+  shares    Share[]
 }
 
 model File {
@@ -51,8 +52,6 @@ model File {
 
   folderId  Int?
   folder    Folder? @relation(fields: [folderId], references: [id], onDelete: Cascade)
-
-  shares    Share[]
 }
 
 model Share {
@@ -61,8 +60,8 @@ model Share {
   expiresAt DateTime?
   createdAt DateTime  @default(now())
 
-  fileId    Int
-  file      File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  folderId  Int
+  folder    Folder @relation(fields: [folderId], references: [id], onDelete: Cascade)
 }
 
 model Session {

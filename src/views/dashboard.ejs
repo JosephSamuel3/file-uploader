@@ -40,6 +40,12 @@
     </form>
   </section>
 
+  <% if (locals.shareUrl) { %>
+    <div class="share-banner">
+      Share link created: <a href="<%= shareUrl %>" target="_blank"><%= shareUrl %></a>
+    </div>
+  <% } %>
+
   <section class="folders">
     <h2>Folders</h2>
     <% if (folders.length === 0) { %>
@@ -73,6 +79,10 @@
             </form>
             <form class="delete" action="/folders/<%= folder.id %>/delete" method="POST">
               <button type="submit">Delete</button>
+            </form>
+            <form class="share" action="/folders/<%= folder.id %>/share" method="POST">
+              <input type="datetime-local" name="expiresAt" placeholder="Expiry (optional)" />
+              <button type="submit">Share</button>
             </form>
           </li>
         <% }) %>
