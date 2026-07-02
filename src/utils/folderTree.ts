@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 
 async function getDescendantFilePaths(folderId: number, userId: number): Promise<string[]> {
   const paths: string[] = [];

@@ -1,5 +1,5 @@
-import { prisma } from "../lib/prisma";
-import type { Folder } from "../generated/prisma/client";
+import { prisma } from "../lib/prisma.js";
+import type { Folder } from "../generated/prisma/client.js";
 
 type Breadcrumb = { id: number; name: string };
 

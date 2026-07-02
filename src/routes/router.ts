@@ -1,13 +1,13 @@
 import express from "express";
-import { isAuthenticated } from "../middleware/auth";
-import { upload } from "../middleware/upload";
-import { nameValidator, signUpValidator } from "../validators/nameValidator";
-import { validateFile } from "../validators/validateFile";
-import * as indexController from "../controllers/indexController";
-import * as authController from "../controllers/authController";
-import * as fileController from "../controllers/fileController";
-import * as folderController from "../controllers/folderController";
-import * as shareController from "../controllers/shareController";
+import { isAuthenticated } from "../middleware/auth.js";
+import { upload } from "../middleware/upload.js";
+import { nameValidator, signUpValidator } from "../validators/nameValidator.js";
+import { validateFile } from "../validators/validateFile.js";
+import * as indexController from "../controllers/indexController.js";
+import * as authController from "../controllers/authController.js";
+import * as fileController from "../controllers/fileController.js";
+import * as folderController from "../controllers/folderController.js";
+import * as shareController from "../controllers/shareController.js";
 
 const router = express.Router();
 

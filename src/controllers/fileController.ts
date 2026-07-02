@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
-import { prisma } from "../lib/prisma";
-import { formatFileSize, formatDate } from "../utils/fileFormat";
-import { setFlash } from "../utils/flash";
-import { uploadFile, deleteFile, getSignedUrl } from "../utils/storage";
+import { prisma } from "../lib/prisma.js";
+import { formatFileSize, formatDate } from "../utils/fileFormat.js";
+import { setFlash } from "../utils/flash.js";
+import { uploadFile, deleteFile, getSignedUrl } from "../utils/storage.js";
 
 function backToFolder(res: Response, folderId: number | null) {
   res.redirect(folderId ? `/dashboard/${folderId}` : "/dashboard");

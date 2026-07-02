@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { prisma } from "../lib/prisma";
-import { getSignedUrl } from "../utils/storage";
+import { prisma } from "../lib/prisma.js";
+import { getSignedUrl } from "../utils/storage.js";
 
 async function postCreateShare(req: Request, res: Response, next: NextFunction) {
   try {

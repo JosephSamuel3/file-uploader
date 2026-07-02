@@ -1,9 +1,9 @@
 import fs from "fs/promises";
 import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
-import { prisma } from "../lib/prisma";
-import { getDescendantFilePaths } from "../utils/folderTree";
-import { setFlash } from "../utils/flash";
+import { prisma } from "../lib/prisma.js";
+import { getDescendantFilePaths } from "../utils/folderTree.js";
+import { setFlash } from "../utils/flash.js";
 
 function backToFolder(res: Response, folderId: number | null) {
   res.redirect(folderId ? `/dashboard/${folderId}` : "/dashboard");

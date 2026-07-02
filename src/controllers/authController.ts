@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import passport from "passport";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 
 const getLogin = (req: Request, res: Response) => {
   res.render("login", {

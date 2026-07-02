@@ -8,9 +8,9 @@ import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import passport from "passport";
 
-import "./config/passport";
-import { prisma } from "./lib/prisma";
-import { router } from "./routes/router"
+import "./config/passport.js";
+import { prisma } from "./lib/prisma.js";
+import { router } from "./routes/router.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

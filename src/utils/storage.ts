@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import path from "path";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../lib/supabase.js";
 
 const bucket = process.env.SUPABASE_BUCKET ?? "files";
 

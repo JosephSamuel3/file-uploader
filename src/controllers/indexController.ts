@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { prisma } from "../lib/prisma";
-import { getBreadcrumbs } from "../utils/breadcrumbs";
-import { formatFileSize } from "../utils/fileFormat";
-import { popFlash } from "../utils/flash";
+import { prisma } from "../lib/prisma.js";
+import { getBreadcrumbs } from "../utils/breadcrumbs.js";
+import { formatFileSize } from "../utils/fileFormat.js";
+import { popFlash } from "../utils/flash.js";
 
 //call to action page before user is loged in
 const getIndex = (req: Request, res: Response) => {
